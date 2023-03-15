@@ -21,7 +21,7 @@ function onSubmit(e){
 
 async function generateImageRequest(prompt,size){
  try{
-    showul();
+    showSpinner();
     const response = await fetch('/openai/generateimage',{
         method: 'POST',
         headers:{
@@ -33,7 +33,7 @@ async function generateImageRequest(prompt,size){
         })
     });
     if(!response.ok){
-       removeul();
+       removeSpinner();
        throw new Error('That image could not be generated');
     }
     
@@ -42,20 +42,20 @@ async function generateImageRequest(prompt,size){
 
     const imageUrl = data.data
     document.querySelector('#image').src = imageUrl;
-    removeul();
+    removeSpinner();
 
 }catch(error){
      document.querySelector('.msg').textContent = error;  
 } 
 }
 
-function showul(){
-    document.querySelector('.ul').classList.add('show');
+function showSpinner() {
+    document.querySelector('.spinner').classList.add('show');
 
 }
 
-function removeul(){
-    document.querySelector('.ul').classList.remove('show');
+function removeSpinner() {
+    document.querySelector('.spinner').classList.remove('show');
     
 }
 
